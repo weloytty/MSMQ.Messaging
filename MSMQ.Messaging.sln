@@ -1,0 +1,81 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSMQ.Messaging", "src\MSMQ.Messaging.csproj", "{EE75E822-D684-4624-8B44-275ACF88BBFB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{7FBE9D74-BC04-4AD8-A8CD-3BE0924B2315}"
+	ProjectSection(SolutionItems) = preProject
+		doc\AccessControlEntry.uex = doc\AccessControlEntry.uex
+		doc\AccessControlEntryType.uex = doc\AccessControlEntryType.uex
+		doc\AccessControlList.uex = doc\AccessControlList.uex
+		doc\AcknowledgeTypes.uex = doc\AcknowledgeTypes.uex
+		doc\ActiveXMessageFormatter.uex = doc\ActiveXMessageFormatter.uex
+		doc\BinaryMessageFormatter.uex = doc\BinaryMessageFormatter.uex
+		doc\CryptographicProviderType.uex = doc\CryptographicProviderType.uex
+		doc\DefaultPropertiesToSend.uex = doc\DefaultPropertiesToSend.uex
+		doc\EncryptionAlgorithm.uex = doc\EncryptionAlgorithm.uex
+		doc\EncryptionRequired.uex = doc\EncryptionRequired.uex
+		doc\GenericAccessRights.uex = doc\GenericAccessRights.uex
+		doc\HashAlgorithm.uex = doc\HashAlgorithm.uex
+		doc\IMessageFormatter.uex = doc\IMessageFormatter.uex
+		doc\Message.uex = doc\Message.uex
+		doc\MessageEnumerator.uex = doc\MessageEnumerator.uex
+		doc\MessagePriority.uex = doc\MessagePriority.uex
+		doc\MessageQueue.uex = doc\MessageQueue.uex
+		doc\MessageQueueAccessControlEntry.uex = doc\MessageQueueAccessControlEntry.uex
+		doc\MessageQueueAccessRights.uex = doc\MessageQueueAccessRights.uex
+		doc\MessageQueueCriteria.uex = doc\MessageQueueCriteria.uex
+		doc\MessageQueueEnumerator.uex = doc\MessageQueueEnumerator.uex
+		doc\MessageQueueErrorCode.uex = doc\MessageQueueErrorCode.uex
+		doc\MessageQueueException.uex = doc\MessageQueueException.uex
+		doc\MessageQueuePermission.uex = doc\MessageQueuePermission.uex
+		doc\MessageQueuePermissionAccess.uex = doc\MessageQueuePermissionAccess.uex
+		doc\MessageQueuePermissionAttribute.uex = doc\MessageQueuePermissionAttribute.uex
+		doc\MessageQueuePermissionEntry.uex = doc\MessageQueuePermissionEntry.uex
+		doc\MessageQueuePermissionEntryCollection.uex = doc\MessageQueuePermissionEntryCollection.uex
+		doc\MessageQueueTransaction.uex = doc\MessageQueueTransaction.uex
+		doc\MessageQueueTransactionStatus.uex = doc\MessageQueueTransactionStatus.uex
+		doc\MessageQueueTransactionType.uex = doc\MessageQueueTransactionType.uex
+		doc\MessageType.uex = doc\MessageType.uex
+		doc\MessagingDescriptionAttribute.uex = doc\MessagingDescriptionAttribute.uex
+		doc\PeekCompletedEventArgs.uex = doc\PeekCompletedEventArgs.uex
+		doc\PeekCompletedEventHandler.uex = doc\PeekCompletedEventHandler.uex
+		doc\QueueAccessMode.uex = doc\QueueAccessMode.uex
+		doc\ReceiveCompletedEventArgs.uex = doc\ReceiveCompletedEventArgs.uex
+		doc\ReceiveCompletedEventHandler.uex = doc\ReceiveCompletedEventHandler.uex
+		doc\StandardAccessRights.uex = doc\StandardAccessRights.uex
+		doc\Trustee.uex = doc\Trustee.uex
+		doc\TrusteeType.uex = doc\TrusteeType.uex
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{59046190-CC24-4730-969C-D2048F9C3CA7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSMQ.Messaging.Tests", "tests\MSMQ.Messaging.Tests.csproj", "{9FDCCC29-CBCE-4385-B898-5663B3806ADD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE75E822-D684-4624-8B44-275ACF88BBFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE75E822-D684-4624-8B44-275ACF88BBFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE75E822-D684-4624-8B44-275ACF88BBFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE75E822-D684-4624-8B44-275ACF88BBFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FDCCC29-CBCE-4385-B898-5663B3806ADD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FDCCC29-CBCE-4385-B898-5663B3806ADD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FDCCC29-CBCE-4385-B898-5663B3806ADD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FDCCC29-CBCE-4385-B898-5663B3806ADD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9FDCCC29-CBCE-4385-B898-5663B3806ADD} = {59046190-CC24-4730-969C-D2048F9C3CA7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {821EE212-ED3B-4307-B2A1-6194F74145CF}
+	EndGlobalSection
+EndGlobal

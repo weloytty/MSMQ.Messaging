@@ -1,8 +1,3 @@
-//------------------------------------------------------------------------------
-// <copyright file="XmlMessageFormatter.cs" company="Microsoft">
-//     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
-//------------------------------------------------------------------------------
 
 using System;
 using System.Collections;
@@ -38,8 +33,8 @@ namespace MSMQ.Messaging
         /// </devdoc>
         public XmlMessageFormatter()
         {
-            this.TargetTypes = new Type[0];
-            this.TargetTypeNames = new string[0];
+            this.TargetTypes = Array.Empty<Type>();
+            this.TargetTypeNames = Array.Empty<string>();
         }
 
         /// <include file='..\..\doc\XmlMessageFormatter.uex' path='docs/doc[@for="XmlMessageFormatter.XmlMessageFormatter1"]/*' />
@@ -50,7 +45,7 @@ namespace MSMQ.Messaging
         public XmlMessageFormatter(string[] targetTypeNames)
         {
             this.TargetTypeNames = targetTypeNames;
-            this.TargetTypes = new Type[0];
+            this.TargetTypes = Array.Empty<Type>();
         }
 
         /// <include file='..\..\doc\XmlMessageFormatter.uex' path='docs/doc[@for="XmlMessageFormatter.XmlMessageFormatter2"]/*' />
@@ -61,7 +56,7 @@ namespace MSMQ.Messaging
         public XmlMessageFormatter(Type[] targetTypes)
         {
             this.TargetTypes = targetTypes;
-            this.TargetTypeNames = new string[0];
+            this.TargetTypeNames = Array.Empty<string>();
         }
 
         /// <include file='..\..\doc\XmlMessageFormatter.uex' path='docs/doc[@for="XmlMessageFormatter.TargetTypeNames"]/*' />
@@ -83,7 +78,7 @@ namespace MSMQ.Messaging
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
 
                 this.typeNamesAdded = false;
                 this.targetTypeNames = value;
@@ -109,7 +104,7 @@ namespace MSMQ.Messaging
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
 
                 this.typesAdded = false;
                 this.targetTypes = value;
@@ -124,7 +119,7 @@ namespace MSMQ.Messaging
         public bool CanRead(Message message)
         {
             if (message == null)
-                throw new ArgumentNullException("message");
+                throw new ArgumentNullException(nameof(message));
 
             this.CreateTargetSerializerTable();
 
@@ -200,7 +195,7 @@ namespace MSMQ.Messaging
         public object Read(Message message)
         {
             if (message == null)
-                throw new ArgumentNullException("message");
+                throw new ArgumentNullException(nameof(message));
 
             this.CreateTargetSerializerTable();
 
@@ -225,10 +220,10 @@ namespace MSMQ.Messaging
         public void Write(Message message, object obj)
         {
             if (message == null)
-                throw new ArgumentNullException("message");
+                throw new ArgumentNullException(nameof(message));
 
             if (obj == null)
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
 
             Stream stream = new MemoryStream();
             Type serializedType = obj.GetType();

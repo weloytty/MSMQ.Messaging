@@ -1,8 +1,4 @@
-//----------------------------------------------------
-// <copyright file="MessageQueuePermissionEntry.cs" company="Microsoft">
-//     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
-//------------------------------------------------------------------------------
+
 
 using System;
 using System.ComponentModel;
@@ -25,7 +21,7 @@ namespace MSMQ.Messaging
         public MessageQueuePermissionEntry(MessageQueuePermissionAccess permissionAccess, string path)
         {
             if (path == null)
-                throw new ArgumentNullException("path");
+                throw new ArgumentNullException(nameof(path));
 
             if (path != MessageQueuePermission.Any && !MessageQueue.ValidatePath(path, false))
                 throw new ArgumentException(Res.GetString(Res.PathSyntax));
@@ -39,7 +35,7 @@ namespace MSMQ.Messaging
         public MessageQueuePermissionEntry(MessageQueuePermissionAccess permissionAccess, string machineName, string label, string category)
         {
             if (machineName == null && label == null && category == null)
-                throw new ArgumentNullException("machineName");
+                throw new ArgumentNullException(nameof(machineName));
 
             if (machineName != null && !SyntaxCheck.CheckMachineName(machineName))
                 throw new ArgumentException(Res.GetString(Res.InvalidParameter, "MachineName", machineName));

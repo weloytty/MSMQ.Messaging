@@ -1,8 +1,3 @@
-//------------------------------------------------------------------------------
-// <copyright file="SafeNativeMethods.cs" company="Microsoft">
-//     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
-//------------------------------------------------------------------------------    
 
 using System;
 using System.Runtime.ConstrainedExecution;
@@ -102,7 +97,7 @@ namespace MSMQ.Messaging.Interop
                                                   IntPtr oldacl,
                                                   out IntPtr newAcl);
 
-        [DllImport(ExternDll.Kernel32, CharSet = CharSet.Auto)]
+        [DllImport(ExternDll.Kernel32, CharSet = CharSet.Unicode)]
         public static extern bool GetComputerName(StringBuilder lpBuffer, int[] nSize);
 
         public const int FORMAT_MESSAGE_ALLOCATE_BUFFER = 0x00000100,
@@ -113,7 +108,7 @@ namespace MSMQ.Messaging.Interop
             FORMAT_MESSAGE_ARGUMENT_ARRAY = 0x00002000,
             FORMAT_MESSAGE_MAX_WIDTH_MASK = 0x000000FF;
 
-        [DllImport(ExternDll.Kernel32, CharSet = CharSet.Auto)]
+        [DllImport(ExternDll.Kernel32, CharSet = CharSet.Unicode)]
         public static extern int FormatMessage(int dwFlags, IntPtr lpSource, int dwMessageId,
                                                 int dwLanguageId, StringBuilder lpBuffer, int nSize, IntPtr arguments);
 

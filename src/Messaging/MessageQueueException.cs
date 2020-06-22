@@ -1,8 +1,3 @@
-//------------------------------------------------------------------------------
-// <copyright file="MessageQueueException.cs" company="Microsoft">
-//     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
-//------------------------------------------------------------------------------
 
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -112,7 +107,7 @@ namespace MSMQ.Messaging
         {
             if (info == null)
             {
-                throw new ArgumentNullException("info");
+                throw new ArgumentNullException(nameof(info));
             }
             info.AddValue("NativeErrorCode", nativeErrorCode);
             base.GetObjectData(info, context);

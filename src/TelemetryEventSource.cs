@@ -25,7 +25,7 @@ namespace MSMQ
     internal const EventTags MarkPii = (EventTags) 134217728;
     internal const EventFieldTags DropPiiField = (EventFieldTags) 67108864;
     internal const EventFieldTags HashPiiField = (EventFieldTags) 134217728;
-    private const string MessagingProviderName = "Microsoft.DOTNET.System.Messaging";
+    private const string MessagingProviderName = "MSMQ.Messaging";
 
     internal TelemetryEventSource(string eventSourceName):base(eventSourceName,(EventSourceSettings) 8,TelemetryEventSource.telemetryTraits)
     {
@@ -59,7 +59,7 @@ namespace MSMQ
     }
 
     internal TelemetryEventSource()
-      : this("Microsoft.DOTNET.System.Messaging")
+      : this(MessagingProviderName)
     {
     }
 

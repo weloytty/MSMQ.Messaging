@@ -1,8 +1,4 @@
-//------------------------------------------------------------------------------
-// <copyright file="MessageFormatterConverter.cs" company="Microsoft">
-//     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
-//------------------------------------------------------------------------------
+
 
 using System;
 using System.ComponentModel;
@@ -80,10 +76,10 @@ namespace MSMQ.Messaging.Design
                 }
                 else if (value is ActiveXMessageFormatter)
                 {
-                    ConstructorInfo ctor = typeof(ActiveXMessageFormatter).GetConstructor(new Type[0]);
+                    ConstructorInfo ctor = typeof(ActiveXMessageFormatter).GetConstructor(Array.Empty<Type>());
                     if (ctor != null)
                     {
-                        return new InstanceDescriptor(ctor, new object[0]);
+                        return new InstanceDescriptor(ctor, Array.Empty<object>());
                     }
                 }
                 else if (value is BinaryMessageFormatter)

@@ -1,8 +1,3 @@
-//------------------------------------------------------------------------------
-// <copyright file="Message.cs" company="Microsoft">
-//     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
-//------------------------------------------------------------------------------
 
 
 using System;
@@ -535,7 +530,7 @@ namespace MSMQ.Messaging
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
 
                 //Should not remove if default, the default value might change in future MQ clients
                 //if (value.CompareTo("Microsoft Base Cryptographic Provider, Ver. 1.0") == 0) {                    
@@ -787,7 +782,7 @@ namespace MSMQ.Messaging
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
 
                 //If default
                 if (value.Length == 0)
@@ -899,7 +894,7 @@ namespace MSMQ.Messaging
                 if (!this.filter.DestinationSymmetricKey)
                 {
                     if (!receiveCreated)
-                        return new byte[0];
+                        return Array.Empty<byte>();
 
                     throw new InvalidOperationException(Res.GetString(Res.MissingProperty, "DestinationSymmetricKey"));
                 }
@@ -912,7 +907,7 @@ namespace MSMQ.Messaging
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
 
                 //If default
                 if (value.Length == 0)
@@ -948,7 +943,7 @@ namespace MSMQ.Messaging
                 if (!this.filter.DigitalSignature)
                 {
                     if (!receiveCreated)
-                        return new byte[0];
+                        return Array.Empty<byte>();
 
                     throw new InvalidOperationException(Res.GetString(Res.MissingProperty, "DigitalSignature"));
                 }
@@ -961,7 +956,7 @@ namespace MSMQ.Messaging
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
 
                 if (value.Length == 0)
                 {
@@ -1039,7 +1034,7 @@ namespace MSMQ.Messaging
                 {
                     //Return default.
                     if (!receiveCreated)
-                        return new byte[0];
+                        return Array.Empty<byte>();
 
                     throw new InvalidOperationException(Res.GetString(Res.MissingProperty, "Extension"));
                 }
@@ -1052,7 +1047,7 @@ namespace MSMQ.Messaging
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
 
                 //If default
                 if (value.Length == 0)
@@ -1088,7 +1083,7 @@ namespace MSMQ.Messaging
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
 
                 this.cachedFormatter = value;
             }
@@ -1244,7 +1239,7 @@ namespace MSMQ.Messaging
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
 
                 //If default
                 if (value.Length == 0)
@@ -1514,7 +1509,7 @@ namespace MSMQ.Messaging
                 {
                     //Return default
                     if (!receiveCreated)
-                        return new byte[0];
+                        return Array.Empty<byte>();
 
                     throw new InvalidOperationException(Res.GetString(Res.MissingProperty, "SenderCertificate"));
                 }
@@ -1527,7 +1522,7 @@ namespace MSMQ.Messaging
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
 
                 //If default
                 if (value.Length == 0)

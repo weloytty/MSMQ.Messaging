@@ -1,8 +1,4 @@
-//------------------------------------------------------------------------------
-// <copyright file="EncryptionRequired.cs" company="Microsoft">
-//     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
-//------------------------------------------------------------------------------
+
 
 using MSMQ.Messaging.Interop;
 using System.Diagnostics;

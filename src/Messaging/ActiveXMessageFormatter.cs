@@ -1,8 +1,4 @@
-//------------------------------------------------------------------------------
-// <copyright file="ActiveXMessageFormatter.cs" company="Microsoft">
-//     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
-//------------------------------------------------------------------------------
+
 
 using System;
 using System.IO;
@@ -61,7 +57,7 @@ namespace MSMQ.Messaging
         public bool CanRead(Message message)
         {
             if (message == null)
-                throw new ArgumentNullException("message");
+                throw new ArgumentNullException(nameof(message));
 
             int variantType = message.BodyType;
             if (variantType != VT_BOOL && variantType != VT_CLSID &&
@@ -110,7 +106,7 @@ namespace MSMQ.Messaging
         public object Read(Message message)
         {
             if (message == null)
-                throw new ArgumentNullException("message");
+                throw new ArgumentNullException(nameof(message));
 
             Stream stream;
             byte[] bytes;
@@ -241,7 +237,7 @@ namespace MSMQ.Messaging
         public void Write(Message message, object obj)
         {
             if (message == null)
-                throw new ArgumentNullException("message");
+                throw new ArgumentNullException(nameof(message));
 
             Stream stream;
             int variantType;
@@ -414,7 +410,7 @@ namespace MSMQ.Messaging
 
             public ComStreamFromDataStream(Stream dataStream)
             {
-                if (dataStream == null) throw new ArgumentNullException("dataStream");
+                if (dataStream == null) throw new ArgumentNullException(nameof(dataStream));
                 this.dataStream = dataStream;
             }
 

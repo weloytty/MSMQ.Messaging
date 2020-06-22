@@ -1,8 +1,4 @@
-//------------------------------------------------------------------------------
-// <copyright file="QueuePropertyVariants.cs" company="Microsoft">
-//     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
-//------------------------------------------------------------------------------
+
 
 namespace MSMQ.Messaging.Interop
 {

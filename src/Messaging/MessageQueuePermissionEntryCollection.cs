@@ -1,8 +1,4 @@
-//----------------------------------------------------
-// <copyright file="MessageQueuePermissionEntryCollection.cs" company="Microsoft">
-//     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
-//------------------------------------------------------------------------------
+
 
 using System;
 using System.Collections;
@@ -49,7 +45,7 @@ namespace MSMQ.Messaging
         {
             if (value == null)
             {
-                throw new ArgumentNullException("value");
+                throw new ArgumentNullException(nameof(value));
             }
             for (int i = 0; ((i) < (value.Length)); i = (i + 1))
             {
@@ -62,7 +58,7 @@ namespace MSMQ.Messaging
         {
             if (value == null)
             {
-                throw new ArgumentNullException("value");
+                throw new ArgumentNullException(nameof(value));
             }
             int currentCount = value.Count;
             for (int i = 0; i < currentCount; i = (i + 1))

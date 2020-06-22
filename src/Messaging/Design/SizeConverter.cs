@@ -1,8 +1,3 @@
-//------------------------------------------------------------------------------
-// <copyright file="SizeConverter.cs" company="Microsoft">
-//     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
-//------------------------------------------------------------------------------
 
 using System;
 using System.ComponentModel;
@@ -67,7 +62,7 @@ namespace MSMQ.Messaging.Design
         {
             if (destinationType == null)
             {
-                throw new ArgumentNullException("destinationType");
+                throw new ArgumentNullException(nameof(destinationType));
             }
 
             if (destinationType == typeof(string))

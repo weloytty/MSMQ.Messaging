@@ -5,8 +5,6 @@ using Xunit;
 namespace Community.System.Messaging.Tests {
     public class MessageTests {
 
-        
-
         [Fact()]
         public void MessageTest() {
             using var q = new Message();

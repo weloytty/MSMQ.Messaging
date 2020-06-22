@@ -1,8 +1,6 @@
 namespace MSMQ.Messaging
 {
 
-    using System;
-
     internal static class ValidationUtility
     {
 

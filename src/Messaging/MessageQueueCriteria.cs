@@ -1,8 +1,4 @@
-//------------------------------------------------------------------------------
-// <copyright file="MessageQueueCriteria.cs" company="Microsoft">
-//     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
-//------------------------------------------------------------------------------
+
 
 using System;
 using System.ComponentModel;
@@ -122,7 +118,7 @@ namespace MSMQ.Messaging
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException("value");
+                    throw new ArgumentNullException(nameof(value));
 
                 this.label = value;
                 this.filter.Label = true;

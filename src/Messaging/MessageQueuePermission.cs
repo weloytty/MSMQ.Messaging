@@ -75,7 +75,7 @@ namespace MSMQ.Messaging
         public MessageQueuePermission(MessageQueuePermissionEntry[] permissionAccessEntries)
         {
             if (permissionAccessEntries == null)
-                throw new ArgumentNullException("permissionAccessEntries");
+                throw new ArgumentNullException(nameof(permissionAccessEntries));
 
             this.PermissionEntries.AddRange(permissionAccessEntries);
         }
@@ -432,7 +432,7 @@ namespace MSMQ.Messaging
                 {
                     StringBuilder accessStringBuilder = null;
                     int[] enumValues = (int[])Enum.GetValues(typeof(MessageQueuePermissionAccess));
-                    Array.Sort(enumValues, InvariantComparer.Default);
+                    Array.Sort(enumValues, System.StringComparer.InvariantCultureIgnoreCase);
                     for (int index = (enumValues.Length - 1); index >= 0; --index)
                     {
                         if (enumValues[index] != 0 && ((currentAccess & enumValues[index]) == enumValues[index]))

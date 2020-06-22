@@ -1,8 +1,4 @@
-//------------------------------------------------------------------------------
-// <copyright file="MessageEnumerator.cs" company="Microsoft">
-//     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
-//------------------------------------------------------------------------------
+
 
 using System;
 using System.Collections;
@@ -207,7 +203,7 @@ namespace MSMQ.Messaging
         public Message RemoveCurrent(MessageQueueTransaction transaction)
         {
             if (transaction == null)
-                throw new ArgumentNullException("transaction");
+                throw new ArgumentNullException(nameof(transaction));
 
             return RemoveCurrent(TimeSpan.Zero, transaction, MessageQueueTransactionType.None);
         }
@@ -243,7 +239,7 @@ namespace MSMQ.Messaging
         public Message RemoveCurrent(TimeSpan timeout, MessageQueueTransaction transaction)
         {
             if (transaction == null)
-                throw new ArgumentNullException("transaction");
+                throw new ArgumentNullException(nameof(transaction));
 
             return RemoveCurrent(timeout, transaction, MessageQueueTransactionType.None);
         }

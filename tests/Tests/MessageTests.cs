@@ -2,7 +2,7 @@
 using MSMQ.Messaging;
 using Xunit;
 
-namespace Community.System.Messaging.Tests {
+namespace MSMQ.Messaging.Tests {
     public class MessageTests {
 
         [Fact()]

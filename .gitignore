@@ -351,3 +351,4 @@ MigrationBackup/
 
 #JetBrains rider
 .idea/
+/.vscode

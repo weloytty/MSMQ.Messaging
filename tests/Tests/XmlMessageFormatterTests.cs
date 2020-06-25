@@ -7,7 +7,6 @@ namespace MSMQ.Messaging.Tests
 {
     public class XmlMessageFormatterTests
     {
-
         public XmlMessageFormatterTests()
         {
             if (!MessageQueue.Exists(TestCommon.TEST_PRIVATE_TRANSACTIONAL_QUEUE))

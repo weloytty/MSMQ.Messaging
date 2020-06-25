@@ -36,11 +36,11 @@ namespace MSMQ.Messaging.Tests
         }
 
 
-        public byte[] ConvertStreamToByteArray(global::System.IO.Stream input)
+        public byte[] ConvertStreamToByteArray(System.IO.Stream input)
         {
             byte[] buffer = new byte[16 * 1024];
 
-            using global::System.IO.MemoryStream ms = new global::System.IO.MemoryStream();
+            using System.IO.MemoryStream ms = new System.IO.MemoryStream();
             int chunk;
 
             while ((chunk = input.Read(buffer, 0, buffer.Length)) > 0)

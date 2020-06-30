@@ -6,6 +6,14 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <AssemblyName>MSMQ.Messaging</AssemblyName>
     <RootNamespace>MSMQ</RootNamespace>
+    <Authors>MSMQ.Messaging Team</Authors>
+    <PackageLicenseFile></PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/weloytty/MSMQ.Messaging</PackageProjectUrl>
+    <PackageTags>MSMQ,System.Messaging</PackageTags>
+    <Description>A drop in replacement for System.Messaging for use in .net core on Windows.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>

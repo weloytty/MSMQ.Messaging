@@ -7,13 +7,13 @@ namespace MSMQ.Messaging.Tests
     public class MessageQueueTests
     {
 
-     
+
 
         public MessageQueueTests()
         {
             if (!MessageQueue.Exists(TestCommon.TEST_PRIVATE_TRANSACTIONAL_QUEUE))
             {
-                using var mq = MessageQueue.Create(TestCommon.TEST_PRIVATE_TRANSACTIONAL_QUEUE,true);
+                using var mq = MessageQueue.Create(TestCommon.TEST_PRIVATE_TRANSACTIONAL_QUEUE, true);
 
             }
 
@@ -59,17 +59,17 @@ namespace MSMQ.Messaging.Tests
         public void ReceiveByCorrelationIdTest()
         {
 
-           
-            MessageQueue queue = new MessageQueue(TestCommon.TEST_PRIVATE_NONTRANSACTIONAL_QUEUE);
-            Message msg = new Message("Example Message Body");
+
+            using MessageQueue queue = new MessageQueue(TestCommon.TEST_PRIVATE_NONTRANSACTIONAL_QUEUE);
+             Message msg = new Message("Example Message Body");
 
             queue.Send(msg, "Example Message Label");
 
             string id = msg.Id;
 
             msg = queue.ReceiveById(id, TimeSpan.FromSeconds(10.0));
-            MessageQueue transQueue = new MessageQueue(TestCommon.TEST_PRIVATE_TRANSACTIONAL_QUEUE);
-            Message responseMsg = new Message("Example Response Message Body") {CorrelationId = id};
+            using MessageQueue transQueue = new MessageQueue(TestCommon.TEST_PRIVATE_TRANSACTIONAL_QUEUE);
+            Message responseMsg = new Message("Example Response Message Body") { CorrelationId = id };
 
             transQueue.Send(responseMsg, "Example Response Message Label",
                 MessageQueueTransactionType.Single);
@@ -84,7 +84,6 @@ namespace MSMQ.Messaging.Tests
 
             // Display the response message's property values.
             Assert.True(responseMsg.CorrelationId == msg.Id);
-
         }
 
         //[Fact()]
@@ -96,7 +95,7 @@ namespace MSMQ.Messaging.Tests
         [Fact()]
         public void SendTest()
         {
-            using var mq = new MessageQueue(TestCommon.TEST_PRIVATE_TRANSACTIONAL_QUEUE );
+            using var mq = new MessageQueue(TestCommon.TEST_PRIVATE_TRANSACTIONAL_QUEUE);
             if (mq.Transactional)
             {
                 using var msgTransaction = new MessageQueueTransaction();

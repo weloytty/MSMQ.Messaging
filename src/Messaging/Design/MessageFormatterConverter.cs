@@ -39,13 +39,13 @@ namespace MSMQ.Messaging.Design
         /// <internalonly/>                                                  
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
         {
-            if (value != null && value is string)
+            if (value != null && value is string s)
             {
-                if (((string)value) == typeof(ActiveXMessageFormatter).Name)
+                if (s == typeof(ActiveXMessageFormatter).Name)
                     return new ActiveXMessageFormatter();
-                if (((string)value) == typeof(BinaryMessageFormatter).Name)
+                if (s == typeof(BinaryMessageFormatter).Name)
                     return new BinaryMessageFormatter();
-                if (((string)value) == typeof(XmlMessageFormatter).Name)
+                if (s == typeof(XmlMessageFormatter).Name)
                     return new XmlMessageFormatter();
             }
 
@@ -65,13 +65,12 @@ namespace MSMQ.Messaging.Design
             }
             if (destinationType == typeof(InstanceDescriptor))
             {
-                if (value is XmlMessageFormatter)
+                if (value is XmlMessageFormatter f1)
                 {
-                    XmlMessageFormatter f = (XmlMessageFormatter)value;
                     ConstructorInfo ctor = typeof(XmlMessageFormatter).GetConstructor(new Type[] { typeof(string[]) });
                     if (ctor != null)
                     {
-                        return new InstanceDescriptor(ctor, new object[] { f.TargetTypeNames });
+                        return new InstanceDescriptor(ctor, new object[] { f1.TargetTypeNames });
                     }
                 }
                 else if (value is ActiveXMessageFormatter)
@@ -82,9 +81,8 @@ namespace MSMQ.Messaging.Design
                         return new InstanceDescriptor(ctor, Array.Empty<object>());
                     }
                 }
-                else if (value is BinaryMessageFormatter)
+                else if (value is BinaryMessageFormatter f)
                 {
-                    BinaryMessageFormatter f = (BinaryMessageFormatter)value;
                     ConstructorInfo ctor = typeof(BinaryMessageFormatter).GetConstructor(new Type[] {
                         typeof(FormatterAssemblyStyle), typeof(FormatterTypeStyle) });
 

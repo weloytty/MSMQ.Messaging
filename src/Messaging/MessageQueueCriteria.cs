@@ -117,10 +117,7 @@ namespace MSMQ.Messaging
 
             set
             {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
-
-                this.label = value;
+                this.label = value ?? throw new ArgumentNullException(nameof(value));
                 this.filter.Label = true;
             }
         }

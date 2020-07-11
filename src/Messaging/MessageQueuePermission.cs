@@ -136,8 +136,7 @@ namespace MSMQ.Messaging
         /// </devdoc>
         public override IPermission Copy()
         {
-            MessageQueuePermission permission = new MessageQueuePermission();
-            permission.isUnrestricted = this.isUnrestricted;
+            MessageQueuePermission permission = new MessageQueuePermission {isUnrestricted = this.isUnrestricted};
             foreach (MessageQueuePermissionEntry entry in this.PermissionEntries)
                 permission.PermissionEntries.Add(entry);
 
@@ -176,7 +175,7 @@ namespace MSMQ.Messaging
                         {
                             string currentAccess = accessArray[index2].Trim();
                             if (Enum.IsDefined(typeof(MessageQueuePermissionAccess), currentAccess))
-                                permissionAccess = permissionAccess | (int)Enum.Parse(typeof(MessageQueuePermissionAccess), currentAccess);
+                                permissionAccess |= (int)Enum.Parse(typeof(MessageQueuePermissionAccess), currentAccess);
                         }
                     }
 
@@ -443,7 +442,7 @@ namespace MSMQ.Messaging
                                 accessStringBuilder.Append("|");
 
                             accessStringBuilder.Append(Enum.GetName(typeof(MessageQueuePermissionAccess), enumValues[index]));
-                            currentAccess = currentAccess & (enumValues[index] ^ enumValues[index]);
+                            currentAccess &= (enumValues[index] ^ enumValues[index]);
                         }
                     }
 

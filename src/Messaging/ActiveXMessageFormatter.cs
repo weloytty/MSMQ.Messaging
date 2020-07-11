@@ -93,8 +93,7 @@ namespace MSMQ.Messaging
         /// </devdoc>
         public static void InitStreamedObject(object streamedObject)
         {
-            IPersistStreamInit persistStreamInit = streamedObject as IPersistStreamInit;
-            if (persistStreamInit != null)
+            if (streamedObject is IPersistStreamInit persistStreamInit)
                 persistStreamInit.InitNew();
         }
 
@@ -241,16 +240,16 @@ namespace MSMQ.Messaging
 
             Stream stream;
             int variantType;
-            if (obj is string)
+            if (obj is string s)
             {
-                int size = ((string)obj).Length * 2;
+                int size = s.Length * 2;
                 if (this.internalBuffer == null || this.internalBuffer.Length < size)
                     this.internalBuffer = new byte[size];
 
                 if (unicodeEncoding == null)
                     this.unicodeEncoding = new UnicodeEncoding();
 
-                this.unicodeEncoding.GetBytes(((string)obj).ToCharArray(), 0, size / 2, this.internalBuffer, 0);
+                this.unicodeEncoding.GetBytes(s.ToCharArray(), 0, size / 2, this.internalBuffer, 0);
                 message.properties.SetUI1Vector(NativeMethods.MESSAGE_PROPID_BODY, this.internalBuffer);
                 message.properties.AdjustSize(NativeMethods.MESSAGE_PROPID_BODY, size);
                 message.properties.SetUI4(NativeMethods.MESSAGE_PROPID_BODY_SIZE, size);
@@ -270,9 +269,8 @@ namespace MSMQ.Messaging
                 message.properties.SetUI4(NativeMethods.MESSAGE_PROPID_BODY_TYPE, VT_UI1 | VT_VECTOR);
                 return;
             }
-            else if (obj is char[])
+            else if (obj is char[] chars)
             {
-                char[] chars = (char[])obj;
                 int size = chars.Length * 2;
                 if (this.internalBuffer == null || this.internalBuffer.Length < size)
                     this.internalBuffer = new byte[size];
@@ -286,16 +284,16 @@ namespace MSMQ.Messaging
                 message.properties.SetUI4(NativeMethods.MESSAGE_PROPID_BODY_TYPE, VT_LPWSTR);
                 return;
             }
-            else if (obj is byte)
+            else if (obj is byte b)
             {
                 stream = new MemoryStream(1);
-                stream.Write(new byte[] { (byte)obj }, 0, 1);
+                stream.Write(new byte[] {b}, 0, 1);
                 variantType = VT_UI1;
             }
-            else if (obj is bool)
+            else if (obj is bool b1)
             {
                 stream = new MemoryStream(1);
-                if ((bool)obj)
+                if (b1)
                     stream.Write(new byte[] { 0xff }, 0, 1);
                 else
                     stream.Write(new byte[] { 0x00 }, 0, 1);
@@ -308,24 +306,24 @@ namespace MSMQ.Messaging
                 stream.Write(bytes, 0, 2);
                 variantType = VT_UI2;
             }
-            else if (obj is Decimal)
+            else if (obj is decimal @decimal)
             {
                 stream = new MemoryStream(8);
-                byte[] bytes = BitConverter.GetBytes(Decimal.ToOACurrency((Decimal)obj));
+                byte[] bytes = BitConverter.GetBytes(Decimal.ToOACurrency(@decimal));
                 stream.Write(bytes, 0, 8);
                 variantType = VT_CY;
             }
-            else if (obj is DateTime)
+            else if (obj is DateTime time)
             {
                 stream = new MemoryStream(8);
-                byte[] bytes = BitConverter.GetBytes(((DateTime)obj).Ticks);
+                byte[] bytes = BitConverter.GetBytes(time.Ticks);
                 stream.Write(bytes, 0, 8);
                 variantType = VT_DATE;
             }
-            else if (obj is Double)
+            else if (obj is double d)
             {
                 stream = new MemoryStream(8);
-                byte[] bytes = BitConverter.GetBytes((Double)obj);
+                byte[] bytes = BitConverter.GetBytes(d);
                 stream.Write(bytes, 0, 8);
                 variantType = VT_R8;
             }
@@ -336,38 +334,38 @@ namespace MSMQ.Messaging
                 stream.Write(bytes, 0, 2);
                 variantType = VT_I2;
             }
-            else if (obj is UInt16)
+            else if (obj is ushort @ushort)
             {
                 stream = new MemoryStream(2);
-                byte[] bytes = BitConverter.GetBytes((UInt16)obj);
+                byte[] bytes = BitConverter.GetBytes(@ushort);
                 stream.Write(bytes, 0, 2);
                 variantType = VT_UI2;
             }
-            else if (obj is Int32)
+            else if (obj is int i)
             {
                 stream = new MemoryStream(4);
-                byte[] bytes = BitConverter.GetBytes((int)obj);
+                byte[] bytes = BitConverter.GetBytes(i);
                 stream.Write(bytes, 0, 4);
                 variantType = VT_I4;
             }
-            else if (obj is UInt32)
+            else if (obj is uint u)
             {
                 stream = new MemoryStream(4);
-                byte[] bytes = BitConverter.GetBytes((UInt32)obj);
+                byte[] bytes = BitConverter.GetBytes(u);
                 stream.Write(bytes, 0, 4);
                 variantType = VT_UI4;
             }
-            else if (obj is Int64)
+            else if (obj is long l)
             {
                 stream = new MemoryStream(8);
-                byte[] bytes = BitConverter.GetBytes((Int64)obj);
+                byte[] bytes = BitConverter.GetBytes(l);
                 stream.Write(bytes, 0, 8);
                 variantType = VT_I8;
             }
-            else if (obj is UInt64)
+            else if (obj is ulong @ulong)
             {
                 stream = new MemoryStream(8);
-                byte[] bytes = BitConverter.GetBytes((UInt64)obj);
+                byte[] bytes = BitConverter.GetBytes(@ulong);
                 stream.Write(bytes, 0, 8);
                 variantType = VT_UI8;
             }
@@ -378,9 +376,8 @@ namespace MSMQ.Messaging
                 stream.Write(bytes, 0, 4);
                 variantType = VT_R4;
             }
-            else if (obj is IPersistStream)
+            else if (obj is IPersistStream pstream)
             {
-                IPersistStream pstream = (IPersistStream)obj;
                 ComStreamFromDataStream comStream = new ComStreamFromDataStream(new MemoryStream());
                 NativeMethods.OleSaveToStream(pstream, comStream);
                 stream = comStream.GetDataStream();
@@ -410,8 +407,7 @@ namespace MSMQ.Messaging
 
             public ComStreamFromDataStream(Stream dataStream)
             {
-                if (dataStream == null) throw new ArgumentNullException(nameof(dataStream));
-                this.dataStream = dataStream;
+                this.dataStream = dataStream ?? throw new ArgumentNullException(nameof(dataStream));
             }
 
 

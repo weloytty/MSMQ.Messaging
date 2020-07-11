@@ -7,3 +7,4 @@ using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Naming", "CA1720:Identifier contains type name", Justification = "<Pending>", Scope = "type", Target = "~T:MSMQ.Messaging.MessageQueueTransactionType")]
 [assembly: SuppressMessage("Performance", "CA1819:Properties should not return arrays", Justification = "<Pending>", Scope = "member", Target = "~P:MSMQ.Messaging.DefaultPropertiesToSend.Extension")]
+[assembly: SuppressMessage("CodeQuality", "IDE0052:Remove unread private members", Justification = "<Pending>", Scope = "member", Target = "~F:MSMQ.Messaging.MessageQueueCriteria.machineId")]

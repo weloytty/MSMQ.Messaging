@@ -37,9 +37,7 @@ namespace MSMQ.Messaging {
                 if (environment == UnknownEnvironment) { 
                     lock (AccessControlList.staticLock) {
                         if (environment == UnknownEnvironment) {
-                            //SECREVIEW: jruiz- need to assert Environment permissions here
-                            //                        the environment check is not exposed as a public 
-                            //                        method                        
+                                                 
                             EnvironmentPermission environmentPermission = new EnvironmentPermission(PermissionState.Unrestricted);                        
                             environmentPermission.Assert();                        
                             try {

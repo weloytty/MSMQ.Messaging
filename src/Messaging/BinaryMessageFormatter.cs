@@ -36,9 +36,7 @@ namespace MSMQ.Messaging
         /// </devdoc>
         public BinaryMessageFormatter(FormatterAssemblyStyle topObjectFormat, FormatterTypeStyle typeFormat)
         {
-            this.formatter = new BinaryFormatter();
-            this.formatter.AssemblyFormat = topObjectFormat;
-            this.formatter.TypeFormat = typeFormat;
+            this.formatter = new BinaryFormatter {AssemblyFormat = topObjectFormat, TypeFormat = typeFormat};
         }
 
         /// <include file='..\..\doc\BinaryMessageFormatter.uex' path='docs/doc[@for="BinaryMessageFormatter.TopObjectFormat"]/*' />

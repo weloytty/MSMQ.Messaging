@@ -141,10 +141,8 @@ namespace MSMQ.Messaging
         {
             try
             {
-                using (TelemetryEventSource eventSource = new TelemetryEventSource())
-                {
-                    eventSource.MessageQueue();
-                }
+                using TelemetryEventSource eventSource = new TelemetryEventSource();
+                eventSource.MessageQueue();
             }
             catch
             {
@@ -943,10 +941,7 @@ namespace MSMQ.Messaging
 
             set
             {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
-
-                this.receiveFilter = value;
+                this.receiveFilter = value ?? throw new ArgumentNullException(nameof(value));
             }
         }
 
@@ -1240,8 +1235,8 @@ namespace MSMQ.Messaging
                     if (host != null)
                     {
                         object baseComponent = host.RootComponent;
-                        if (baseComponent != null && baseComponent is ISynchronizeInvoke)
-                            this.synchronizingObject = (ISynchronizeInvoke)baseComponent;
+                        if (baseComponent != null && baseComponent is ISynchronizeInvoke invoke)
+                            this.synchronizingObject = invoke;
                     }
                 }
 
@@ -1931,9 +1926,8 @@ namespace MSMQ.Messaging
         /// </devdoc>
         public static SecurityContext GetSecurityContext()
         {
-            SecurityContextHandle handle;
             // SECURITY: Note that this call is not marked with SUCS attribute (i.e., requires FullTrust)   
-            int status = NativeMethods.MQGetSecurityContextEx(out handle);
+            int status = NativeMethods.MQGetSecurityContextEx(out var handle);
             if (MessageQueue.IsFatalError(status))
                 throw new MessageQueueException(status);
 
@@ -2043,8 +2037,8 @@ namespace MSMQ.Messaging
                 IntPtr stringPointer = Marshal.ReadIntPtr((IntPtr)((long)basePointer + index * IntPtr.Size));
                 //Using Unicode API even on Win9x
                 string path = Marshal.PtrToStringUni(stringPointer);
-                queues[index] = new MessageQueue("FormatName:DIRECT=OS:" + path);
-                queues[index].queuePath = path;                
+                queues[index] = new MessageQueue("FormatName:DIRECT=OS:" + path) {queuePath = path};
+
                 SafeNativeMethods.MQFreeMemory(stringPointer);
             }
 
@@ -2085,8 +2079,7 @@ namespace MSMQ.Messaging
         /// </devdoc>
         public static MessageQueue[] GetPublicQueuesByCategory(Guid category)
         {
-            MessageQueueCriteria criteria = new MessageQueueCriteria();
-            criteria.Category = category;
+            MessageQueueCriteria criteria = new MessageQueueCriteria {Category = category};
             return CreateMessageQueuesSnapshot(criteria);
         }
 
@@ -2106,8 +2099,7 @@ namespace MSMQ.Messaging
         /// <internalonly/>
         private static MessageQueue[] GetPublicQueuesByLabel(string label, bool checkSecurity)
         {
-            MessageQueueCriteria criteria = new MessageQueueCriteria();
-            criteria.Label = label;
+            MessageQueueCriteria criteria = new MessageQueueCriteria {Label = label};
             return CreateMessageQueuesSnapshot(criteria, checkSecurity);
         }
 
@@ -2134,8 +2126,8 @@ namespace MSMQ.Messaging
                 SearchResult localComputer = localComputerSearcher.FindOne();
                 if (localComputer != null)
                 {
-                    DirectorySearcher localComputerMsmqSearcher = new DirectorySearcher(localComputer.GetDirectoryEntry());
-                    localComputerMsmqSearcher.Filter = "(CN=msmq)";
+                    DirectorySearcher localComputerMsmqSearcher =
+                        new DirectorySearcher(localComputer.GetDirectoryEntry()) {Filter = "(CN=msmq)"};
                     SearchResult localMsmqNode = localComputerMsmqSearcher.FindOne();
                     SearchResult remoteMsmqNode = null;
                     if (localMsmqNode != null)
@@ -2147,8 +2139,8 @@ namespace MSMQ.Messaging
                             if (remoteComputer == null)
                                 return  Array.Empty<MessageQueue>();
 
-                            DirectorySearcher remoteComputerMsmqSearcher = new DirectorySearcher(remoteComputer.GetDirectoryEntry());
-                            remoteComputerMsmqSearcher.Filter = "(CN=msmq)";
+                            DirectorySearcher remoteComputerMsmqSearcher =
+                                new DirectorySearcher(remoteComputer.GetDirectoryEntry()) {Filter = "(CN=msmq)"};
                             remoteMsmqNode = remoteComputerMsmqSearcher.FindOne();
                             if (remoteMsmqNode == null)
                                 return  Array.Empty<MessageQueue>();
@@ -2156,8 +2148,10 @@ namespace MSMQ.Messaging
                         else
                             remoteMsmqNode = localMsmqNode;
 
-                        DirectorySearcher objectsSearcher = new DirectorySearcher(remoteMsmqNode.GetDirectoryEntry());
-                        objectsSearcher.Filter = "(objectClass=mSMQQueue)";
+                        DirectorySearcher objectsSearcher = new DirectorySearcher(remoteMsmqNode.GetDirectoryEntry())
+                        {
+                            Filter = "(objectClass=mSMQQueue)"
+                        };
                         objectsSearcher.PropertiesToLoad.Add("Name");
                         SearchResultCollection objects = objectsSearcher.FindAll();
                         MessageQueue[] queues = new MessageQueue[objects.Count];
@@ -2180,8 +2174,7 @@ namespace MSMQ.Messaging
                 DirectoryServicesPermission.RevertAssert();
             }
 
-            MessageQueueCriteria criteria = new MessageQueueCriteria();
-            criteria.MachineName = machineName;
+            MessageQueueCriteria criteria = new MessageQueueCriteria {MachineName = machineName};
             return CreateMessageQueuesSnapshot(criteria, false);
         }
 
@@ -2537,10 +2530,9 @@ namespace MSMQ.Messaging
                     if (!attached)
                     {
                         MessageQueueHandle handle = MQInfo.ReadHandle;
-                        int handleInformation;
                         // If GetHandleInformation returns false, it means that the 
                         // handle created for reading is not a File handle.
-                        if (!SafeNativeMethods.GetHandleInformation(handle, out handleInformation))
+                        if (!SafeNativeMethods.GetHandleInformation(handle, out var handleInformation))
                             // If not a File handle, need to use MSMQ
                             // APC based async IO.
                             // We will need to store references to pending async requests (bug 88607)
@@ -3220,10 +3212,10 @@ namespace MSMQ.Messaging
             if (label == null)
                 throw new ArgumentNullException(nameof(label));
 
-            if (obj is Message)
+            if (obj is Message message)
             {
-                ((Message)obj).Label = label;
-                SendInternal(obj, transaction, transactionType);
+                message.Label = label;
+                SendInternal(message, transaction, transactionType);
             }
             else
             {
@@ -3253,8 +3245,8 @@ namespace MSMQ.Messaging
             }
 
             Message message = null;
-            if (obj is Message)
-                message = (Message)obj;
+            if (obj is Message message1)
+                message = message1;
 
             if (message == null)
             {
@@ -3414,8 +3406,7 @@ namespace MSMQ.Messaging
 
             Trustee t = new Trustee(user);
             MessageQueueAccessControlEntry ace = new MessageQueueAccessControlEntry(t, rights, entryType);
-            AccessControlList dacl = new AccessControlList();
-            dacl.Add(ace);
+            AccessControlList dacl = new AccessControlList {ace};
             SetPermissions(dacl);
         }
 
@@ -3428,8 +3419,7 @@ namespace MSMQ.Messaging
             if (ace == null)
                 throw new ArgumentNullException(nameof(ace));
 
-            AccessControlList dacl = new AccessControlList();
-            dacl.Add(ace);
+            AccessControlList dacl = new AccessControlList {ace};
             SetPermissions(dacl);
         }
 
@@ -3485,12 +3475,10 @@ namespace MSMQ.Messaging
                     throw new MessageQueueException(mqResult);
                 }
 
-                bool daclPresent, daclDefaulted;
-                IntPtr pDacl;
                 bool success = UnsafeNativeMethods.GetSecurityDescriptorDacl(sdHandle.AddrOfPinnedObject(),
-                                                                                out daclPresent,
-                                                                                out pDacl,
-                                                                                out daclDefaulted);
+                                                                                out var daclPresent,
+                                                                                out var pDacl,
+                                                                                out var daclDefaulted);
 
                 if (!success)
                     throw new Win32Exception();
@@ -3775,8 +3763,7 @@ namespace MSMQ.Messaging
                 NativeOverlapped* overlappedPointer = null;
                 if (this.onCompletionStatusChanged != null)
                 {
-                    Overlapped overlapped = new Overlapped();
-                    overlapped.AsyncResult = this;
+                    Overlapped overlapped = new Overlapped {AsyncResult = this};
                     overlappedPointer = overlapped.Pack(this.onCompletionStatusChanged, null);
                 }
 
@@ -4161,7 +4148,7 @@ namespace MSMQ.Messaging
 
             public Value Get(Key key)
             {
-                Value val = default(Value);    // This keyword might change with C# compiler
+                Value val = default;    // This keyword might change with C# compiler
                 rwLock.AcquireReaderLock(-1);
                 try
                 {
@@ -4318,8 +4305,7 @@ namespace MSMQ.Messaging
                         {
                             if (readHandle.IsInvalid)
                             {
-                                MessageQueueHandle result;
-                                int status = UnsafeNativeMethods.MQOpenQueue(this.formatName, accessMode.GetReadAccessMode(), shareMode, out result);
+                                int status = UnsafeNativeMethods.MQOpenQueue(this.formatName, accessMode.GetReadAccessMode(), shareMode, out var result);
                                 if (MessageQueue.IsFatalError(status))
                                     return false;
 
@@ -4349,8 +4335,7 @@ namespace MSMQ.Messaging
                         {
                             if (writeHandle.IsInvalid)
                             {
-                                MessageQueueHandle result;
-                                int status = UnsafeNativeMethods.MQOpenQueue(this.formatName, accessMode.GetWriteAccessMode(), 0, out result);
+                                int status = UnsafeNativeMethods.MQOpenQueue(this.formatName, accessMode.GetWriteAccessMode(), 0, out var result);
                                 if (MessageQueue.IsFatalError(status))
                                     return false;
 
@@ -4384,8 +4369,7 @@ namespace MSMQ.Messaging
                         {
                             if (readHandle.IsInvalid)
                             {
-                                MessageQueueHandle result;
-                                int status = UnsafeNativeMethods.MQOpenQueue(this.formatName, accessMode.GetReadAccessMode(), shareMode, out result);
+                                int status = UnsafeNativeMethods.MQOpenQueue(this.formatName, accessMode.GetReadAccessMode(), shareMode, out var result);
                                 if (MessageQueue.IsFatalError(status))
                                     throw new MessageQueueException(status);
 
@@ -4411,8 +4395,7 @@ namespace MSMQ.Messaging
                         {
                             if (writeHandle.IsInvalid)
                             {
-                                MessageQueueHandle result;
-                                int status = UnsafeNativeMethods.MQOpenQueue(this.formatName, accessMode.GetWriteAccessMode(), 0, out result);
+                                int status = UnsafeNativeMethods.MQOpenQueue(this.formatName, accessMode.GetWriteAccessMode(), 0, out var result);
                                 if (MessageQueue.IsFatalError(status))
                                     throw new MessageQueueException(status);
 

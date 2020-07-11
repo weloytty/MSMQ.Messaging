@@ -17,8 +17,7 @@ namespace MSMQ.Messaging
 
         internal Cursor(MessageQueue queue)
         {
-            CursorHandle result;
-            int status = SafeNativeMethods.MQCreateCursor(queue.MQInfo.ReadHandle, out result);
+            int status = SafeNativeMethods.MQCreateCursor(queue.MQInfo.ReadHandle, out var result);
             if (MessageQueue.IsFatalError(status))
                 throw new MessageQueueException(status);
 

@@ -38,7 +38,7 @@ namespace MSMQ.Messaging.Design
             {
                 string text = ((string)value).Trim();
 
-                if (text == String.Empty)
+                if (string.IsNullOrEmpty(text))
                     return null;
 
                 if (text.CompareTo(Res.GetString(Res.NotSet)) != 0)

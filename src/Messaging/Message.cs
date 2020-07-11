@@ -1082,10 +1082,7 @@ namespace MSMQ.Messaging
 
             set
             {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
-
-                this.cachedFormatter = value;
+                this.cachedFormatter = value ?? throw new ArgumentNullException(nameof(value));
             }
         }
 

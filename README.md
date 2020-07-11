@@ -2,7 +2,7 @@
 
 MSMQ.Messaging is intended to be a straight port of the .NET Framework's System.Messaging assembly to .NET Core, based on the [reference source](https://github.com/microsoft/referencesource).  Since MSMQ is platform specific, it will only run on Windows, and should work with .NET Core 3.1 and up.  I originally created this project so that I could move legacy code to .NET Core, and it has only been tested with relatively simple use-cases.  
 
-The code that this is derived from is [awaiting merge](https://github.com/microsoft/referencesource/pull/141) into the main branch of [reference source](https://github.com/microsoft/referencesource). Until that is complete, the licensing status is ambiguous, and you use this at your own risk.  For now, you will have to build from source if you want to use the code, I anticipate sumbitting to nuget as soon as possible.
+The code that this is derived from is [awaiting merge](https://github.com/microsoft/referencesource/pull/141) into the main branch of [reference source](https://github.com/microsoft/referencesource). Until that is complete, the licensing status is ambiguous, and you use this at your own risk.  For now, you will have to build from source if you want to use the code, I anticipate submitting to nuget as soon as possible.
 
 ## Getting Started
 

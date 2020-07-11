@@ -15,7 +15,7 @@ It should be pretty straightforward: clone the source and dotnet build it. There
 
 ## Upgrading .NET Framework projects
 
-MSMQ.Messaging is intended to be simple to use if you are replacing System.Messaging code.  You should only have to change the references and rename System.Messaging to MSMQ.Messaging in your usings section.  Everything else should remain the same.  Note that I have removed the winforms code, since you'll still be able to edit queues &etc using System.Messaging; MSMQ Messaging is intended to upgrade your old code, not provide a management interface to create/edit queues. (You can still create queues with code, only the dialog boxes were removed.)
+MSMQ.Messaging is intended to be simple to use if you are replacing System.Messaging code.  You should only have to change the references and change System.Messaging to MSMQ.Messaging in your usings section.  Everything else should remain the same.  Note that I have removed the winforms code, since you'll still be able to edit queues &etc using System.Messaging; MSMQ Messaging is intended to upgrade your old code, not provide a management interface to create/edit queues. (You can still create queues with code, only the dialog boxes were removed.)
 
 ## Build and Test
 

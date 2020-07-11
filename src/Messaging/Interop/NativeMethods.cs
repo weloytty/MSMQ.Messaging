@@ -7,7 +7,9 @@ namespace MSMQ.Messaging.Interop
 {
     
 
-    [ComVisible(false)]
+    [ComVisible(false),
+    SuppressMessage("CodeQuality", "IDE0051:Remove unused private members"),
+    SuppressMessage("Performance", "CA1823:Avoid unused private fields", Justification = "Reference Source")]
     internal static class NativeMethods
     {
         //Message Acknowledge constants.

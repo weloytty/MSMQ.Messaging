@@ -1,5 +1,9 @@
-﻿namespace MSMQ
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace MSMQ
 {
+    
+    [SuppressMessage("Style", "IDE1006:Naming Styles")]
     internal static class ExternDll
     {
         public const string Activeds = "activeds.dll";

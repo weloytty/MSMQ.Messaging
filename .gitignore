@@ -352,3 +352,6 @@ MigrationBackup/
 #JetBrains rider
 .idea/
 /.vscode
+
+
+.editorconfig

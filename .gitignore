@@ -355,3 +355,4 @@ MigrationBackup/
 
 
 .editorconfig
+nuget.config

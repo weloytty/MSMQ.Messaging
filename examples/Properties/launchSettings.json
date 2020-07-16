@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Examples": {
+      "commandName": "Project",
+      "commandLineArgs": "FORMATNAME:DIRECT=OS:KMCI1APP2022\\PRIVATE$\\TESTING::RECEIVE"
+    }
+  }
+}

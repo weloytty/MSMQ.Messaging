@@ -141,8 +141,10 @@ namespace MSMQ.Messaging
         {
             try
             {
-                using TelemetryEventSource eventSource = new TelemetryEventSource();
-                eventSource.MessageQueue();
+                using (TelemetryEventSource eventSource = new TelemetryEventSource())
+                {
+                    eventSource.MessageQueue();
+                }
             }
             catch
             {

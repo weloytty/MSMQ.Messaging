@@ -36,7 +36,7 @@ namespace MSMQ.Messaging.Tests
         }
 
 
-        public byte[] ConvertStreamToByteArray(System.IO.Stream input)
+        internal static byte[] ConvertStreamToByteArray(System.IO.Stream input)
         {
             byte[] buffer = new byte[16 * 1024];
 

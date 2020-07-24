@@ -1,13 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net472</TargetFrameworks>
-    <UseWindowsForms>true</UseWindowsForms>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <AssemblyName>MSMQ.Messaging</AssemblyName>
     <RootNamespace>MSMQ</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Description>A drop in replacement for System.Messaging for use in .NET Core</Description>
     <Authors>MSMQ.Messaging Team</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -15,10 +13,9 @@
     <RepositoryUrl>https://github.com/weloytty/MSMQ.Messaging</RepositoryUrl>
     <PackageTags>MSMQ, System.Messaging</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <FileVersion>1.0.2.0</FileVersion>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="DynamicLanguageRuntime" Version="1.2.3" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">

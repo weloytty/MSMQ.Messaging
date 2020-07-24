@@ -4,15 +4,13 @@ using Xunit;
 
 namespace MSMQ.Messaging.Tests {
     public class MessageTests {
-
         [Fact()]
         public void MessageTest() {
             using var q = new Message();
             Assert.NotNull(q);
             Assert.IsType<Message>(q);
         }
-
-
+        
         [Fact()]
         public void MessageTestBody()
         {

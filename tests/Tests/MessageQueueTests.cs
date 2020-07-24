@@ -6,9 +6,6 @@ namespace MSMQ.Messaging.Tests
 {
     public class MessageQueueTests
     {
-
-
-
         public MessageQueueTests()
         {
             if (!MessageQueue.Exists(TestCommon.TEST_PRIVATE_TRANSACTIONAL_QUEUE))
@@ -27,6 +24,7 @@ namespace MSMQ.Messaging.Tests
                 using var mq = MessageQueue.Create(TestCommon.TEST_ADMIN_QUEUE);
             }
         }
+        
         [Fact()]
         public void CreateTest()
         {
@@ -41,7 +39,6 @@ namespace MSMQ.Messaging.Tests
             Assert.False(MessageQueue.Exists(queueName));
         }
 
-
         [Fact()]
         public void ReceiveTest()
         {
@@ -53,21 +50,20 @@ namespace MSMQ.Messaging.Tests
             var msg = mq.Receive();
             Assert.Equal(msg.Body, TestCommon.TEST_MESSAGE_BODY);
         }
-
-
+        
         [Fact()]
         public void ReceiveByCorrelationIdTest()
         {
-
-
+            
             using MessageQueue queue = new MessageQueue(TestCommon.TEST_PRIVATE_NONTRANSACTIONAL_QUEUE);
-             Message msg = new Message("Example Message Body");
+            Message msg = new Message("Example Message Body");
 
             queue.Send(msg, "Example Message Label");
 
             string id = msg.Id;
 
             msg = queue.ReceiveById(id, TimeSpan.FromSeconds(10.0));
+
             using MessageQueue transQueue = new MessageQueue(TestCommon.TEST_PRIVATE_TRANSACTIONAL_QUEUE);
             Message responseMsg = new Message("Example Response Message Body") { CorrelationId = id };
 
@@ -84,13 +80,10 @@ namespace MSMQ.Messaging.Tests
 
             // Display the response message's property values.
             Assert.True(responseMsg.CorrelationId == msg.Id);
-        }
+            msg.Dispose();
 
-        //[Fact()]
-        //public void ReceiveByLookupIdTest()
-        //{
-        //    Assert.True(false, "This test needs an implementation");
-        //}
+            responseMsg.Dispose();
+        }
 
         [Fact()]
         public void SendTest()
@@ -108,14 +101,5 @@ namespace MSMQ.Messaging.Tests
                 mq.Send(TestCommon.TEST_MESSAGE_BODY);
             }
         }
-
-
-
-
-        //[Fact()]
-        //public void SetPermissionsTest()
-        //{
-        //    Assert.True(false, "This test needs an implementation");
-        //}
     }
 }

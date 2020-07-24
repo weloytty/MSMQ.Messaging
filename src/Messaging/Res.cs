@@ -280,7 +280,7 @@ namespace MSMQ.Messaging
 
         internal Res()
         {
-            this.resources = new ResourceManager("System.Properties.Resources", typeof(Properties.Resources).Assembly);
+            this.resources = new ResourceManager("MSMQ.Properties.Resources", typeof(Properties.Resources).Assembly);
         }
 
         private static Res GetLoader()

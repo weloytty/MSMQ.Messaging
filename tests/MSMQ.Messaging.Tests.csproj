@@ -6,6 +6,8 @@
     <IsPackable>false</IsPackable>
 
     <RootNamespace>MSMQ.Messaging</RootNamespace>
+
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>

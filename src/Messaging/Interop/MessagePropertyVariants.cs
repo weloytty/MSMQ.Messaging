@@ -309,10 +309,8 @@ namespace MSMQ.Messaging.Interop
                     newVectorProperties[usedProperties].vt = vt;
                     if (vt == (short)(VT_VECTOR | VT_UI1))
                     {
-                        bool isGcHandle = false;
                         if (handles[i] == null || handles[i] is GCHandle)
                         {
-                            isGcHandle = handles[i] is GCHandle;
                             newVectorProperties[usedProperties].caub.cElems = (uint)((byte[])objects[i]).Length;
                         }
                         else

@@ -344,10 +344,6 @@ namespace MSMQ.Messaging.Interop
             }
 
             handleVectorIdentifiers = GCHandle.Alloc(newVectorIdentifiers, GCHandleType.Pinned);
-            if (!handleVectorIdentifiers.IsAllocated)
-            {
-                Console.WriteLine();
-            }
 
             handleVectorProperties = GCHandle.Alloc(newVectorProperties, GCHandleType.Pinned);
             handleVectorStatus = GCHandle.Alloc(newVectorStatus, GCHandleType.Pinned);

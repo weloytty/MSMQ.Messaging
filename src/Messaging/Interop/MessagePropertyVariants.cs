@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace MSMQ.Messaging.Interop
 {
-    
+
 
 
     // definition for tagMQPROPVARIANT
@@ -309,8 +309,12 @@ namespace MSMQ.Messaging.Interop
                     newVectorProperties[usedProperties].vt = vt;
                     if (vt == (short)(VT_VECTOR | VT_UI1))
                     {
-                        if (handles[i] == null)
+                        bool isGcHandle = false;
+                        if (handles[i] == null || handles[i] is GCHandle)
+                        {
+                            isGcHandle = handles[i] is GCHandle;
                             newVectorProperties[usedProperties].caub.cElems = (uint)((byte[])objects[i]).Length;
+                        }
                         else
                             newVectorProperties[usedProperties].caub.cElems = (uint)handles[i];
 
@@ -342,6 +346,11 @@ namespace MSMQ.Messaging.Interop
             }
 
             handleVectorIdentifiers = GCHandle.Alloc(newVectorIdentifiers, GCHandleType.Pinned);
+            if (!handleVectorIdentifiers.IsAllocated)
+            {
+                Console.WriteLine();
+            }
+
             handleVectorProperties = GCHandle.Alloc(newVectorProperties, GCHandleType.Pinned);
             handleVectorStatus = GCHandle.Alloc(newVectorStatus, GCHandleType.Pinned);
             vectorIdentifiers = newVectorIdentifiers;
@@ -351,6 +360,7 @@ namespace MSMQ.Messaging.Interop
             reference.propertyIdentifiers = handleVectorIdentifiers.AddrOfPinnedObject();
             reference.propertyValues = handleVectorProperties.AddrOfPinnedObject();
             reference.status = handleVectorStatus.AddrOfPinnedObject();
+
             return reference;
         }
 
@@ -409,7 +419,12 @@ namespace MSMQ.Messaging.Interop
                 }
                 else if (vt == VT_LPWSTR || vt == VT_CLSID || vt == (short)(VT_VECTOR | VT_UI1))
                 {
-                    ((GCHandle)handles[vectorIdentifiers[i] - basePropertyId]).Free();
+                    object obj = handles[vectorIdentifiers[i] - basePropertyId];
+                    if (obj is GCHandle)
+                    {
+                        ((GCHandle)obj).Free();
+                    }
+
                     handles[vectorIdentifiers[i] - basePropertyId] = null;
                 }
                 else if (vt == VT_UI1 || vt == VT_I1)
@@ -423,9 +438,20 @@ namespace MSMQ.Messaging.Interop
 
             }
 
-            handleVectorIdentifiers.Free();
-            handleVectorProperties.Free();
-            handleVectorStatus.Free();
+            if (handleVectorIdentifiers.IsAllocated)
+            {
+                handleVectorIdentifiers.Free();
+            }
+
+            if (handleVectorProperties.IsAllocated)
+            {
+                handleVectorProperties.Free();
+            }
+
+            if (handleVectorStatus.IsAllocated)
+            {
+                handleVectorStatus.Free();
+            }
         }
 
         [StructLayout(LayoutKind.Sequential)]

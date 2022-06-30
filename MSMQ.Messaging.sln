@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30204.135
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSMQ.Messaging", "src\MSMQ.Messaging.csproj", "{EE75E822-D684-4624-8B44-275ACF88BBFB}"
 EndProject
@@ -52,8 +52,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{7FBE9D74-BC0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{59046190-CC24-4730-969C-D2048F9C3CA7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSMQ.Messaging.Tests", "tests\MSMQ.Messaging.Tests.csproj", "{9FDCCC29-CBCE-4385-B898-5663B3806ADD}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DEDD27FA-C6ED-4D3D-A9ED-BC7650BC25A6}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
@@ -69,16 +67,9 @@ Global
 		{EE75E822-D684-4624-8B44-275ACF88BBFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE75E822-D684-4624-8B44-275ACF88BBFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE75E822-D684-4624-8B44-275ACF88BBFB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9FDCCC29-CBCE-4385-B898-5663B3806ADD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9FDCCC29-CBCE-4385-B898-5663B3806ADD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9FDCCC29-CBCE-4385-B898-5663B3806ADD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9FDCCC29-CBCE-4385-B898-5663B3806ADD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{9FDCCC29-CBCE-4385-B898-5663B3806ADD} = {59046190-CC24-4730-969C-D2048F9C3CA7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {821EE212-ED3B-4307-B2A1-6194F74145CF}

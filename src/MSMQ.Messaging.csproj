@@ -13,8 +13,8 @@
     <RepositoryUrl>https://github.com/weloytty/MSMQ.Messaging</RepositoryUrl>
     <PackageTags>MSMQ, System.Messaging</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
-    <AssemblyVersion>1.0.2.0</AssemblyVersion>
-    <FileVersion>1.0.2.0</FileVersion>
+    <AssemblyVersion>1.0.4.0</AssemblyVersion>
+    <FileVersion>1.0.4.0</FileVersion>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>keySign.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>

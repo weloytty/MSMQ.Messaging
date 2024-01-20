@@ -25,4 +25,4 @@ Should be a simple clone and build, I have been using Visual Studio 2019.
 
 ## Contribute
 
-Documentation needs to be updated, and unit tests need to be implemented.  Pull requests gratefully accepted.
+I am overjoyed that people are using this, but I am intentionally leaving it as close to the reference source as possible.  If you want to do something cool, please fork the code and have at it, but I don't expect to update this repo unless it stops working.
